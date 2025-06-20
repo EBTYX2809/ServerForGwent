@@ -2,7 +2,8 @@ name: Deploy server
 
 on:
   push:
-    branches: -master
+    branches: 
+      -master
 
 jobs:
   cleanup_old_container:
