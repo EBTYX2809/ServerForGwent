@@ -1,8 +1,6 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 
-// Test4
-
 namespace LinuxServer
 {
     public class Server
@@ -60,7 +58,7 @@ namespace LinuxServer
 
         private void DisconnectSession(GameSession session)
         {
-            Console.WriteLine("Session removing.");
+            Console.WriteLine("Session removing...");
             session.Client1?.Close();
             session.Client2?.Close();
             session.Client1?.Dispose();
