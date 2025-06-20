@@ -2,7 +2,7 @@ name: Deploy server
 
 on:
   push:
-    branches: 
+    branches:
       - master
 
 jobs:
@@ -26,7 +26,7 @@ jobs:
     needs: cleanup_old_container
     steps:
       - name: Build container
-        run: docker build -t server_for_gwent .
+        run: docker build -t server_for_gwent ./LinuxServer
 
   run_new_container:
     runs-on: self-hosted
