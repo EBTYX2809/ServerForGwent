@@ -12,22 +12,24 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Stop old container
-        run: docker stop server_for_gwent
+        run: docker stop server_for_gwent || true
 
       - name: Remove old container
-        run: docker rm server_for_gwent
+        run: docker rm server_for_gwent || true
 
       - name: Cleanup containers
         run: docker system prune -f
 
   build_new_container:
     runs-on: self-hosted
+    needs: cleanup_old_container
     steps:
       - name: Build container
-        run: docker build -t server_for_gwent
+        run: docker build -t server_for_gwent .
 
   run_new_container:
     runs-on: self-hosted
+    needs: build_new_container
     steps:
       - name: Run container
         run: docker run -d -p 10000:10000 --name server_for_gwent server_for_gwent
