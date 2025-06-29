@@ -7,7 +7,7 @@ on:
 
 jobs:
   cleanup_old_container:
-    runs-on: self-hosted
+    runs-on: [self-hosted, gwent-server]
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -22,14 +22,14 @@ jobs:
         run: docker system prune -f
 
   build_new_container:
-    runs-on: self-hosted
+    runs-on: [self-hosted, gwent-server]
     needs: cleanup_old_container
     steps:
       - name: Build container
         run: docker build -t server_for_gwent ./LinuxServer
 
   run_new_container:
-    runs-on: self-hosted
+    runs-on: [self-hosted, gwent-server]
     needs: build_new_container
     steps:
       - name: Run container
